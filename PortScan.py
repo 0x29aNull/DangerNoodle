@@ -1,6 +1,6 @@
 # IP Range Scanner
 # It's Magically Delicious
-# mlogsdon - 1/26/2022
+#1/26/2022
 
 import io, os, threading, socket
 from queue import Queue
