@@ -1,14 +1,15 @@
-# Subdomain Fuzzer
-#
-# 0x29a
+# Python Subdomain Fuzzer
+# 0x29a - 2/2/22
 
 import io, requests, sys, threading
 from queue import Queue
 
-domain = input('Enter Domain: ')
-wordlist = input('Enter Wordlist Filename: ')
+Domain = input('* [Enter Domain]: ')
+WordList = input('* [Enter Wordlist Filename]: ')
 
 WaitingRoom = Queue()
+
+FoundSubdomains = []
 
 def connect(url):
     try:
@@ -18,11 +19,11 @@ def connect(url):
         return False
 
 def getUrl():
-    with open(wordlist, 'r') as file:
+    with open(WordList, 'r') as file:
         line = file.readline()
         cnt = 0
         while line:
-            url = ("https://{}.{}".format(line.strip(),domain))
+            url = ("https://{}.{}".format(line.strip(),Domain))
             WaitingRoom.put(url)
             line = file.readline()
             cnt += 1
@@ -31,9 +32,10 @@ def daemon():
     while not WaitingRoom.empty():
         url = WaitingRoom.get()
         if connect(url):
-            print("{} Exists".format(url))
+            print("! [{}] Found".format(url))
+            FoundSubdomains.append(url)
         else:
-            print("{} Does Not Exist".format(url))
+            pass
 
 def scan(threads):
     getUrl()
@@ -48,5 +50,7 @@ def scan(threads):
 
     for thread in rThreads:
         thread.join()
+
+    print('-> [Found Subdomains]: ', FoundSubdomains)
 
 scan(100)
