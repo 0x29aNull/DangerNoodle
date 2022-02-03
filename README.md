@@ -1,3 +1,3 @@
 # DangerNoodle Development
 
-## Personal Repository for my Python development.
+**bold text** Personal Repository for my Python development.
