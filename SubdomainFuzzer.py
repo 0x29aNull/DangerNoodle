@@ -7,6 +7,7 @@ import io, requests, sys, threading
 from queue import Queue
 
 domain = input('Enter Domain: ')
+wordlist = input('Enter Wordlist Filename: ')
 
 WaitingRoom = Queue()
 
@@ -18,7 +19,7 @@ def connect(url):
         return False
 
 def getUrl():
-    with open('list.txt', 'r') as file:
+    with open(wordlist, 'r') as file:
         line = file.readline()
         cnt = 0
         while line:
