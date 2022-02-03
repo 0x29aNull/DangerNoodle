@@ -1,5 +1,4 @@
 # Subdomain Fuzzer
-# Name wordlist as 'list.txt' in same directory
 #
 # 0x29a
 
